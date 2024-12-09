@@ -395,31 +395,15 @@ function getSpiralMatrix(size) {
  *  ]                 ]
  */
 function rotateMatrix(matrix) {
-  const size = matrix.length;
-  const newMatrix = new Array(size);
-  for (let i = 0; i < size; i += 1) {
-    newMatrix[i] = new Array(size);
-    for (let j = 0; j < size; j += 1) {
-      newMatrix[i][j] = 0;
+  const newMatrix = matrix;
+  for (let row = 0; row < matrix.length; row += 1) {
+    for (let column = 0; column < row; column += 1) {
+      const temp = matrix[row][column];
+      newMatrix[row][column] = newMatrix[column][row];
+      newMatrix[column][row] = temp;
     }
   }
-  for (let i = 0; i < size; i += 1) {
-    for (let j = 0; j < size; j += 1) {
-      newMatrix[j][i] = matrix[i][j];
-    }
-  }
-  for (let i = 0; i < size; i += 1) {
-    let first = 0;
-    let last = size - 1;
-    while (first < last) {
-      const temp = newMatrix[i][first];
-      newMatrix[i][first] = matrix[i][last];
-      newMatrix[i][last] = temp;
-      first += 1;
-      last += 1;
-    }
-  }
-  return newMatrix;
+  return matrix;
 }
 
 /**
